@@ -51,7 +51,16 @@ android {
         resources.excludes.addAll(
             listOf(
                 "/META-INF/AL2.0",
-                "/META-INF/LGPL2.1"
+                "/META-INF/LGPL2.1",
+                "/META-INF/DEPENDENCIES.txt",
+                "/META-INF/LICENSE.txt",
+                "/META-INF/NOTICE.txt",
+                "/META-INF/NOTICE",
+                "/META-INF/LICENSE",
+                "/META-INF/DEPENDENCIES",
+                "/META-INF/notice.txt",
+                "/META-INF/license.txt",
+                "/META-INF/dependencies.txt",
             )
         )
     }
