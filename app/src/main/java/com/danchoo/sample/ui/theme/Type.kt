@@ -1,4 +1,4 @@
-package com.danchoo.glideimage.ui.theme
+package com.danchoo.sample.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

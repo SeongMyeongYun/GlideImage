@@ -1,11 +1,13 @@
-package com.danchoo.glideimage
+package com.danchoo.sample
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import com.danchoo.glideimage.ui.theme.GlideImageTheme
+import com.danchoo.glideimage.GlideImage
+import com.danchoo.glideimage.R
+import com.danchoo.sample.ui.theme.GlideImageTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
