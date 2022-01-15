@@ -4,6 +4,7 @@ plugins {
     id("kotlin-kapt")
     id("maven-publish")
 }
+group = "com.github.danchoo21"
 
 android {
     compileSdk = 31
