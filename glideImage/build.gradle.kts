@@ -15,8 +15,8 @@ android {
     defaultConfig.run {
         minSdk = 21
         targetSdk = 31
-        versionCode = 109
-        versionName = "0.1.9"
+        versionCode = 110
+        versionName = "0.1.10"
 
         multiDexEnabled = true
 
