@@ -70,7 +70,7 @@ android {
             publications {
                 create<MavenPublication>("maven") {
                     groupId = "com.github.danchoo21"
-                    artifactId = "glide_image"
+                    artifactId = "glideImage"
                     version = "0.1"
                     artifact("$buildDir/outputs/aar/${artifactId}-release.aar")
                 }
