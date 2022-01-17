@@ -16,7 +16,7 @@ android {
         minSdk = 21
         targetSdk = 31
         versionCode = 110
-        versionName = "0.1.10"
+        versionName = "0.1.11"
 
         multiDexEnabled = true
 
@@ -64,6 +64,19 @@ android {
             )
         )
     }
+
+    afterEvaluate {
+        publishing {
+            publications {
+                create<MavenPublication>("maven") {
+                    groupId = "com.github.danchoo21"
+                    artifactId = "glide_image"
+                    version = "0.1"
+                    artifact("$buildDir/outputs/aar/${artifactId}-release.aar")
+                }
+            }
+        }
+    }
 }
 
 
@@ -76,9 +89,9 @@ dependencies {
     implementation("androidx.compose.material:material:1.0.5")
     
     implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.0")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.appcompat:appcompat:1.4.0")
+    implementation("androidx.appcompat:appcompat:1.4.1")
+    implementation("com.google.android.material:material:1.5.0")
+    implementation("androidx.appcompat:appcompat:1.4.1")
 
 
 //    testImplementation 'junit:junit:4.13.2'
