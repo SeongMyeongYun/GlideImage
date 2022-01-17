@@ -7,6 +7,6 @@ dependencyResolutionManagement {
         maven { url "https://jitpack.io" }
     }
 }
-rootProject.name = "GlideImage"
+rootProject.name = "compose_glide_image"
 include ':app'
-include ':glideImage'
+include ':glide-image'
