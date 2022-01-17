@@ -15,8 +15,8 @@ android {
     defaultConfig.run {
         minSdk = 21
         targetSdk = 31
-        versionCode = 112
-        versionName = "0.1.12"
+        versionCode = 100000
+        versionName = "1.0.0"
 
         multiDexEnabled = true
 
@@ -70,8 +70,8 @@ android {
             publications {
                 create<MavenPublication>("maven") {
                     groupId = "com.github.danchoo21"
-                    artifactId = "glideImage"
-                    version = "0.1"
+                    artifactId = "glide-image"
+                    version = "1.0.0"
                     artifact("$buildDir/outputs/aar/${artifactId}-release.aar")
                 }
             }
