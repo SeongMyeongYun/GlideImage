@@ -18,7 +18,7 @@ dependencies {
 ````
 
 
-# 
+# Use - rememberGlideImagePinter
 
 ````kotlin
 @Composable
@@ -68,7 +68,7 @@ private fun TestComposable(
 }
 ````
 
-# 
+# Use - GlideImage
 
 
 ````kotlin
