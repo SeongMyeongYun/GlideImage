@@ -1,5 +1,10 @@
 # GlideImage
 
+Jetpack Compose image loading library.
+use glide version : 4.12.0
+github : https://github.com/bumptech/glide
+
+
 # Setup
 ````kotlin
 allprojects {
