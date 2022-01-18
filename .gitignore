@@ -33,3 +33,5 @@ hs_err_pid*
 /.idea/vcs.xml
 /.idea/workspace.xml
 /.gradle/
+/buildSrc/.gradle/
+/buildSrc/build/
