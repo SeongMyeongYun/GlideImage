@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -9,6 +10,18 @@ android {
 
     kotlinOptions {
         jvmTarget = Config.JAVA_VERSION.toString()
+
+        freeCompilerArgs = freeCompilerArgs.plus(
+            listOf(
+                "-Xopt-in=kotlin.RequiresOptIn",
+                "-Xopt-in=kotlin.Experimental",
+                "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi",
+                "-Xopt-in=com.google.accompanist.pager.ExperimentalPagerApi",
+                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-Xopt-in=com.google.accompanist.permissions.ExperimentalPermissionsApi",
+                "-Xopt-in=androidx.compose.foundation.ExperimentalFoundationApi"
+            )
+        )
     }
 }
 
@@ -49,4 +62,32 @@ dependencies {
     JUnit4.run {
         testImplementation(junit)
     }
+
+    AndroidX.Paging.run {
+        implementation(ktx)
+        implementation(compose)
+    }
+
+    Hilt.run {
+        implementation(android)
+        implementation(compose)
+        kapt(compiler)
+        kaptAndroidTest(compiler)
+        androidTestImplementation(testing)
+    }
+
+
+    Glide.run {
+        implementation(glide)
+        kapt(compiler)
+    }
+
+    Accompanist.run {
+        implementation(permission)
+    }
+
+    Coil.run {
+        implementation(coil)
+    }
+
 }

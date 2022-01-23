@@ -21,12 +21,20 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.*
 
 @Stable
-class GlideImagePainter internal constructor() : Painter() {
+class GlideImagePainter internal constructor(
+) : Painter(), RememberObserver {
     internal var painter: Painter? by mutableStateOf(null)
     internal var placeHolder: Painter? by mutableStateOf(null)
+
+    var canceled: (() -> Unit)? = null
+
+    var test: String = ""
 
     override val intrinsicSize: Size
         get() = painter?.intrinsicSize ?: Size.Unspecified
@@ -34,6 +42,17 @@ class GlideImagePainter internal constructor() : Painter() {
     override fun DrawScope.onDraw() {
         placeHolder?.apply { draw(intrinsicSize) }
         painter?.apply { draw(intrinsicSize) }
+    }
+
+    override fun onAbandoned() {
+        canceled?.invoke()
+    }
+
+    override fun onForgotten() {
+        canceled?.invoke()
+    }
+
+    override fun onRemembered() {
     }
 }
 
@@ -84,14 +103,12 @@ fun rememberGlideImagePinter(
     builder = requestBuilder(builder)
 
     val scope = rememberCoroutineScope { Dispatchers.Main.immediate }
-    val painter = remember(scope) {
-        GlideImagePainter()
-    }
+    val painter = remember(scope) { GlideImagePainter() }
 
     if (data is ImageVector) {
         painter.painter = rememberVectorPainter(image = data)
     } else {
-        UpdateGlidePainter(imagePainter = painter, builder = builder)
+        UpdateGlidePainter(imagePainter = painter, builder = builder, scope = scope)
     }
 
     return painter
@@ -100,26 +117,39 @@ fun rememberGlideImagePinter(
 @Composable
 private fun UpdateGlidePainter(
     imagePainter: GlideImagePainter,
-    builder: RequestBuilder<Bitmap>
+    builder: RequestBuilder<Bitmap>,
+    scope: CoroutineScope
 ) {
-
     if (builder.placeholderId != 0) {
         imagePainter.placeHolder = painterResource(builder.placeholderId)
     }
 
-    builder.into(object : CustomTarget<Bitmap>() {
+    imagePainter.test = UUID.randomUUID().toString()
+
+    val target = object : CustomTarget<Bitmap>() {
         override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
             imagePainter.painter = BitmapPainter(resource.asImageBitmap())
         }
 
         override fun onLoadCleared(placeholder: Drawable?) {
             imagePainter.painter = null
-
             (placeholder as BitmapDrawable?)?.bitmap?.let {
                 imagePainter.placeHolder = BitmapPainter(it.asImageBitmap())
             } ?: kotlin.run {
                 imagePainter.placeHolder = null
             }
         }
-    })
+    }
+
+    builder.into(target)
+
+    val requestManager = LocalImageLoader
+        .current
+        .getRequestManager(LocalContext.current)
+
+    imagePainter.canceled = {
+        scope.launch {
+            requestManager.clear(target)
+        }
+    }
 }
