@@ -22,7 +22,7 @@ allprojects {
 
 ````kotlin
 dependencies {
-    implementation 'com.github.danchoo21:glide-image:1.0.0'
+    implementation 'com.github.danchoo21:glide-image:1.0.2'
 }
 ````
 
@@ -92,6 +92,7 @@ private fun TestComposable(
     contentScale: ContentScale = ContentScale.Fit,
     requestBuilder: RequestBuilder<Bitmap>.() -> RequestBuilder<Bitmap> = { this }
 ) {
+    // Image size != Bitmap Size
     GlideImage(
         modifier = modifier,
         contentDescription = contentDescription,
@@ -109,16 +110,16 @@ private fun TestComposable(
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
     data: Any?,
-    size: Dp,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Fit,
     requestBuilder: RequestBuilder<Bitmap>.() -> RequestBuilder<Bitmap> = { this }
 ) {
+    // Image size == Bitmap Size
+    // Image size 100.dp -> set bitmap size 100.dp 
     GlideImage(
-        modifier = modifier,
+        modifier = modifier.size(100.dp, 100.dp),
         contentDescription = contentDescription,
         data = data,
-        size = size,
         placeHolder = placeHolder,
         contentScale = contentScale,
         requestBuilder = requestBuilder
