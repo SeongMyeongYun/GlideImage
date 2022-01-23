@@ -8,7 +8,7 @@ github : https://github.com/bumptech/glide
 
 compose glide image load.
 
-[![](https://jitpack.io/v/danchoo21/glide-image.svg)](https://jitpack.io/#danchoo21/glide-image)
+
 # Setup
 ````kotlin
 allprojects {
@@ -18,6 +18,8 @@ allprojects {
     }
 }
 ````
+
+[![](https://jitpack.io/v/danchoo21/glide-image.svg)](https://jitpack.io/#danchoo21/glide-image)
 
 ````kotlin
 dependencies {
