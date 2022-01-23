@@ -19,11 +19,11 @@ allprojects {
 }
 ````
 
-
-````kotlin
-dependencies {
 [![Release](https://jitpack.io/v/User/Repo.svg)]
 (https://jitpack.io/danchoo21/com.github.danchoo21)
+````kotlin
+dependencies {
+
 before version : 
     implementation 'com.github.danchoo21:glide-image:1.0.0'
     
