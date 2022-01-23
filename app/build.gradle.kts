@@ -85,9 +85,4 @@ dependencies {
     Accompanist.run {
         implementation(permission)
     }
-
-    Coil.run {
-        implementation(coil)
-    }
-
 }
