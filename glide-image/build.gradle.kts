@@ -33,7 +33,7 @@ android {
                 create<MavenPublication>("maven") {
                     groupId = GlideImageConfig.GROUP_ID
                     artifactId = GlideImageConfig.ARTIFACT_ID
-                    version = Config.COMPOSE_VERSION
+                    version = Config.VERSION_NAME
                     artifact("$buildDir/outputs/aar/${artifactId}-release.aar")
                 }
             }
