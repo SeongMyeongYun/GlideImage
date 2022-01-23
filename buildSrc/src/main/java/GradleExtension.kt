@@ -8,8 +8,8 @@ object Config {
     const val BUILD_TOOL_VERSION = "31.0.0"
     const val MIN_SDK = 21
     const val TARGET_SDK = 31
-    const val VERSION_NAME = "1.0.9"
-    const val VERSION_CODE = 100009
+    const val VERSION_NAME = "1.0.10"
+    const val VERSION_CODE = 100010
 
     const val TEST_INSTRUMENTATION_RUNNER = "com.danchoo.date.CustomTestRunner"
 
