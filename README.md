@@ -22,7 +22,7 @@ allprojects {
 
 ````kotlin
 dependencies {
-    implementation 'com.github.danchoo21:glide-image:1.0.0'
+    implementation 'com.github.danchoo21:glide-image:1.0.7'
 }
 ````
 
