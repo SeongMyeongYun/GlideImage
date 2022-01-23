@@ -2,7 +2,6 @@ package com.danchoo.sample
 
 import android.content.Context
 import android.graphics.Bitmap
-import coil.compose.rememberImagePainter
 import com.bumptech.glide.*
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.load.engine.bitmap_recycle.LruBitmapPool
