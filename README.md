@@ -19,6 +19,8 @@ allprojects {
 }
 ````
 
+[![](https://jitpack.io/v/danchoo21/glide-image.svg)](https://jitpack.io/#danchoo21/glide-image)
+
 ````kotlin
 dependencies {
 
