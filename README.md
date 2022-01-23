@@ -23,11 +23,6 @@ allprojects {
 
 ````kotlin
 dependencies {
-
-before version : 
-    implementation 'com.github.danchoo21:glide-image:1.0.0'
-    
-current version : 
     implementation 'com.github.danchoo21:glide-image:lastVersion'
 }
 ````
@@ -141,6 +136,10 @@ private fun TestComposable(
 class GlideAppImageLoaderImpl: GlideImageLoader {
     override fun getRequestBuilder(context: Context): RequestBuilder<Bitmap> {
         return GlideApp.with(context).asBitmap()
+    }
+    
+    override fun getRequestManager(context: Context): RequestManager {
+        return GlideApp.with(context)
     }
 }
 
