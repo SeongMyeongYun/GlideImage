@@ -19,8 +19,6 @@ allprojects {
 }
 ````
 
-[![Release](https://jitpack.io/v/User/Repo.svg)]
-(https://jitpack.io/danchoo21/com.github.danchoo21)
 ````kotlin
 dependencies {
 
