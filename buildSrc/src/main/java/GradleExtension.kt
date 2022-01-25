@@ -3,7 +3,7 @@ import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 
 object Config {
-    const val APPLICATION_ID = "com.danchoo.date"
+    const val APPLICATION_ID = "com.danchoo.glideimage"
     const val COMPILE_SDK = 31
     const val BUILD_TOOL_VERSION = "31.0.0"
     const val MIN_SDK = 21
