@@ -25,7 +25,7 @@ fun GlideImage(
 ) {
     BoxWithConstraints(modifier = modifier.fillMaxSize()) {
         GlideImage(
-            modifier = modifier,
+            modifier = Modifier.fillMaxSize(),
             contentDescription = contentDescription,
             data = data,
             width = maxWidth,
