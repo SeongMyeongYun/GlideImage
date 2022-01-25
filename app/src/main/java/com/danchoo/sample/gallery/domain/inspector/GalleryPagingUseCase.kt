@@ -9,13 +9,16 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GalleryPagingUseCase @Inject constructor(
-    val repository: GalleryRepository
+    private val repository: GalleryRepository
 ) {
+    companion object {
+        const val PAGE_SIZE = 30
+    }
+
     operator fun invoke(): Flow<PagingData<GalleryItemModel>> = Pager(
         config = PagingConfig(
-            pageSize = 30,
-            prefetchDistance = 30,
-            maxSize = 30 * 5
+            pageSize = PAGE_SIZE,
+            prefetchDistance = PAGE_SIZE
         )
     ) {
         repository.getGalleryPagingSource()

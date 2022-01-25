@@ -1,7 +1,6 @@
 package com.danchoo.sample.gallery.data.datasource
 
 import android.database.Cursor
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.danchoo.sample.gallery.domain.model.GalleryItemModel
@@ -42,11 +41,7 @@ class GalleryPagingSource(
                     nextKey = nextKey
                 )
             } catch (e: Exception) {
-                LoadResult.Page(
-                    data = emptyList(),
-                    prevKey = prevKey,
-                    nextKey = nextKey
-                )
+                LoadResult.Error(e)
             }
         }
     }
@@ -55,7 +50,6 @@ class GalleryPagingSource(
         val offset = key * loadSize
         val galleryItemList = localDataSource.getGalleryItemList(cursor = cursor, offset, loadSize)
 
-        Log.d("_SMY", "galleryItemList ${galleryItemList.size}")
         return galleryItemList
     }
 }
