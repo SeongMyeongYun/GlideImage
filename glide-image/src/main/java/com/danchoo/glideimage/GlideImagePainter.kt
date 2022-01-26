@@ -137,7 +137,7 @@ fun rememberGlideImagePinter(
     builder = requestBuilder(builder)
 
     val scope = rememberCoroutineScope { Dispatchers.Main.immediate }
-    val painter = remember(scope) {
+    val painter = remember(scope, data) {
         GlideImagePainter(
             context = context,
             builder = builder,
