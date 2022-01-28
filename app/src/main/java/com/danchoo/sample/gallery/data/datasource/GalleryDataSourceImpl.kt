@@ -44,7 +44,7 @@ class GalleryDataSourceImpl constructor(
         val projection = getMediaDefaultProjection()
         val cursor = getCursor(projection)
 
-        cursor.moveToPosition(start)
+        cursor.moveToPosition(start - 1)
 
         while (cursor.moveToNext()) {
             val mediaItemModel = getMediaItemModel(cursor, projection)
@@ -68,7 +68,7 @@ class GalleryDataSourceImpl constructor(
         val mediaItemList = mutableListOf<GalleryItemModel>()
         val projection = getMediaDefaultProjection()
 
-        cursor.moveToPosition(start)
+        cursor.moveToPosition(start - 1)
 
         while (cursor.moveToNext()) {
             val mediaItemModel = getMediaItemModel(cursor, projection)

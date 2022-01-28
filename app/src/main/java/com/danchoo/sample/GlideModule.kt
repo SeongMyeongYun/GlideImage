@@ -1,7 +1,7 @@
 package com.danchoo.sample
 
 import android.content.Context
-import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import com.bumptech.glide.*
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.load.engine.bitmap_recycle.LruBitmapPool
@@ -30,8 +30,8 @@ class GlideModule : AppGlideModule() {
 }
 
 class GlideAppImageLoaderImpl : GlideImageLoader {
-    override fun getRequestBuilder(context: Context): RequestBuilder<Bitmap> {
-        return GlideApp.with(context).asBitmap()
+    override fun getRequestBuilder(context: Context): RequestBuilder<Drawable> {
+        return GlideApp.with(context).asDrawable()
     }
 
     override fun getRequestManager(context: Context): RequestManager {

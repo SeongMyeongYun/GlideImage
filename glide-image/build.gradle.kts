@@ -75,4 +75,8 @@ dependencies {
     JUnit4.run {
         testImplementation(junit)
     }
+
+    Accompanist.run {
+        implementation(drawablePainter)
+    }
 }
