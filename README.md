@@ -38,7 +38,7 @@ private fun TestComposable(
     height: Dp = 0.dp,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Crop,
-    requestBuilder: RequestBuilder<Bitmap>.() -> RequestBuilder<Bitmap> = { this }
+    requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ) {
     Image(
         modifier = modifier,
@@ -61,7 +61,7 @@ private fun TestComposable(
     size: Dp = 0.dp,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Crop,
-    requestBuilder: RequestBuilder<Bitmap>.() -> RequestBuilder<Bitmap> = { this }
+    requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ) {
     Image(
         modifier = modifier,
@@ -91,7 +91,7 @@ private fun TestComposable(
     height: Dp,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Fit,
-    requestBuilder: RequestBuilder<Bitmap>.() -> RequestBuilder<Bitmap> = { this }
+    requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ) {
     // Image size != Bitmap Size
     GlideImage(
@@ -134,8 +134,8 @@ private fun TestComposable(
 
 ````kotlin
 class GlideAppImageLoaderImpl: GlideImageLoader {
-    override fun getRequestBuilder(context: Context): RequestBuilder<Bitmap> {
-        return GlideApp.with(context).asBitmap()
+    override fun getRequestBuilder(context: Context): RequestBuilder<Drawable> {
+        return GlideApp.with(context).asDrawable()
     }
     
     override fun getRequestManager(context: Context): RequestManager {
