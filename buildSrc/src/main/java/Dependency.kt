@@ -8,18 +8,23 @@ object AndroidX {
     const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
 
     object Compose {
-        const val version = "1.0.5"
+        const val version = "1.2.0-alpha01"
 
         const val layout = "androidx.compose.foundation:foundation-layout:$version"
         const val ui = "androidx.compose.ui:ui:$version"
         const val uiUtil = "androidx.compose.ui:ui-util:$version"
         const val runtime = "androidx.compose.runtime:runtime:$version"
         const val material = "androidx.compose.material:material:$version"
-        const val animation = "androidx.compose.animation:animation:$version"
+
         const val tooling = "androidx.compose.ui:ui-tooling:$version"
         const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
         const val runtimeLivedata = "androidx.compose.runtime:runtime-livedata:$version"
         const val uiTest = "androidx.compose.ui:ui-test-junit4:$version"
+
+
+        const val animation = "androidx.compose.animation:animation:$version"
+        const val animationGraphics = "androidx.compose.animation:animation-graphics:$version"
+        const val animationCore = "androidx.compose.animation:animation-core:$version"
     }
 
     object Activity {
@@ -74,7 +79,7 @@ object AndroidX {
 }
 
 object Accompanist {
-    private const val version = "0.22.0-rc"
+    private const val version = "0.24.1-alpha"
     const val inserts = "com.google.accompanist:accompanist-insets:$version"
     const val systemUiController = "com.google.accompanist:accompanist-systemuicontroller:$version"
     const val navigationAnimation =
@@ -83,6 +88,8 @@ object Accompanist {
     const val pager = "com.google.accompanist:accompanist-pager:$version"
     const val pagerIndicators = "com.google.accompanist:accompanist-pager-indicators:$version"
     const val permission = "com.google.accompanist:accompanist-permissions:$version"
+
+    const val drawablePainter = "com.google.accompanist:accompanist-drawablepainter:$version"
 }
 
 object Coil {
@@ -171,5 +178,6 @@ object Glide {
     private const val version = "4.12.0"
     const val glide = "com.github.bumptech.glide:glide:$version"
     const val compiler = "com.github.bumptech.glide:compiler:$version"
+    const val webpDecoder = "com.github.zjupure:webpdecoder:2.0.$version"
 }
 

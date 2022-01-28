@@ -1,6 +1,7 @@
 package com.danchoo.glideimage
 
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -21,7 +22,7 @@ fun GlideImage(
     data: Any?,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Fit,
-    requestBuilder: RequestBuilder<Bitmap>.() -> RequestBuilder<Bitmap> = { this }
+    requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ) {
     BoxWithConstraints(modifier = modifier.fillMaxSize()) {
         GlideImage(
@@ -46,7 +47,7 @@ fun GlideImage(
     height: Dp = width,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Fit,
-    requestBuilder: RequestBuilder<Bitmap>.() -> RequestBuilder<Bitmap> = { this }
+    requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ) {
     if (data is ImageVector) {
         Image(

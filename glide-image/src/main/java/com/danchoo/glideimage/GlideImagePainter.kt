@@ -1,15 +1,12 @@
 package com.danchoo.glideimage
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.*
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -22,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.*
 
 @Stable
@@ -29,28 +27,27 @@ class GlideImagePainter internal constructor(
     private val context: Context,
     private val loader: GlideImageLoader,
     private val parentScope: CoroutineScope,
-    private val builder: RequestBuilder<Bitmap>
+    private val builder: RequestBuilder<Drawable>
 ) : Painter(), RememberObserver {
     internal var painter: Painter? by mutableStateOf(null)
     internal var placeHolder: Painter? by mutableStateOf(null)
+    internal var drawable: Drawable? by mutableStateOf(null)
 
     private var job: Job? = null
 
     override val intrinsicSize: Size
         get() = painter?.intrinsicSize ?: Size.Unspecified
 
-    private val target = object : CustomTarget<Bitmap>() {
-        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-            painter = BitmapPainter(resource.asImageBitmap())
+    private val target = object : CustomTarget<Drawable>() {
+        override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+            drawable = resource
+
+            Log.d("_SMY", "resource = ${resource.javaClass.simpleName} $transition")
         }
 
         override fun onLoadCleared(placeholder: Drawable?) {
             painter = null
-            (placeholder as BitmapDrawable?)?.bitmap?.let {
-                placeHolder = BitmapPainter(it.asImageBitmap())
-            } ?: kotlin.run {
-                placeHolder = null
-            }
+            placeHolder = null
         }
     }
 
@@ -89,7 +86,7 @@ fun rememberGlideImagePinter(
     size: Dp = 0.dp,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Fit,
-    requestBuilder: RequestBuilder<Bitmap>.() -> RequestBuilder<Bitmap> = { this }
+    requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ) = rememberGlideImagePinter(
     data = data,
     width = size,
@@ -106,7 +103,7 @@ fun rememberGlideImagePinter(
     height: Dp = width,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Fit,
-    requestBuilder: RequestBuilder<Bitmap>.() -> RequestBuilder<Bitmap> = { this }
+    requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ): Painter {
     if (data is ImageVector) {
         return rememberVectorPainter(image = data)
@@ -148,6 +145,13 @@ fun rememberGlideImagePinter(
 
     if (builder.placeholderId != 0) {
         painter.placeHolder = painterResource(builder.placeholderId)
+    }
+
+    painter.drawable?.let {
+
+        painter.painter = rememberDrawablePainter(drawable = painter.drawable)
+    } ?: run {
+        painter.painter = null
     }
 
     return painter

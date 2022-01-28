@@ -1,7 +1,7 @@
 package com.danchoo.glideimage
 
 import android.content.Context
-import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -13,13 +13,13 @@ import com.bumptech.glide.RequestManager
 val LocalImageLoader = GlideImageLoaderCompositionLocal()
 
 interface GlideImageLoader {
-    fun getRequestBuilder(context: Context): RequestBuilder<Bitmap>
+    fun getRequestBuilder(context: Context): RequestBuilder<Drawable>
     fun getRequestManager(context: Context): RequestManager
 }
 
 internal class GlideImageLoaderImpl : GlideImageLoader {
-    override fun getRequestBuilder(context: Context): RequestBuilder<Bitmap> {
-        return Glide.with(context).asBitmap()
+    override fun getRequestBuilder(context: Context): RequestBuilder<Drawable> {
+        return Glide.with(context).asDrawable()
     }
 
     override fun getRequestManager(context: Context): RequestManager {

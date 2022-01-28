@@ -4,16 +4,16 @@ import org.gradle.api.JavaVersion
 
 object Config {
     const val APPLICATION_ID = "com.danchoo.glideimage"
-    const val COMPILE_SDK = 31
-    const val BUILD_TOOL_VERSION = "31.0.0"
+    const val COMPILE_SDK = 32
+    const val BUILD_TOOL_VERSION = "32.0.0"
     const val MIN_SDK = 21
-    const val TARGET_SDK = 31
+    const val TARGET_SDK = 32
     const val VERSION_NAME = "1.1.1"
     const val VERSION_CODE = 100101
 
     const val TEST_INSTRUMENTATION_RUNNER = "com.danchoo.date.CustomTestRunner"
 
-    val JAVA_VERSION = JavaVersion.VERSION_11
+    val JAVA_VERSION = JavaVersion.VERSION_1_8
 
     const val COMPOSE_VERSION = AndroidX.Compose.version
 }
