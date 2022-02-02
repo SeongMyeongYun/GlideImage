@@ -24,6 +24,7 @@ allprojects {
 ````kotlin
 dependencies {
     implementation 'com.github.danchoo21:glide-image:lastVersion'
+    implementation 'com.google.accompanist:accompanist-drawablepainter:0.24.1-alpha'
 }
 ````
 
