@@ -77,6 +77,6 @@ dependencies {
     }
 
     Accompanist.run {
-        implementation(drawablePainter)
+        api(drawablePainter)
     }
 }
