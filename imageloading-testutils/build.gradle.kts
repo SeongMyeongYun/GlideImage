@@ -2,7 +2,6 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-kapt")
-    id("maven-publish")
 }
 
 android {
@@ -37,37 +36,11 @@ android {
 
         animationsDisabled = true
     }
-
-    afterEvaluate {
-        publishing {
-            publications {
-                create<MavenPublication>("maven") {
-                    groupId = GlideImageConfig.GROUP_ID
-                    artifactId = GlideImageConfig.ARTIFACT_ID
-                    version = Config.VERSION_NAME
-                    artifact("$buildDir/outputs/aar/${artifactId}-release.aar")
-                }
-            }
-        }
-    }
-}
-
-object GlideImageConfig {
-    const val GROUP_ID = "com.github.danchoo21"
-    const val ARTIFACT_ID = "glide-image"
 }
 
 dependencies {
-    androidTestImplementation(project(":imageloading-testutils"))
-
     AndroidX.run {
         implementation(coreKtx)
-        implementation(appcompat)
-    }
-
-    Glide.run {
-        implementation(glide)
-        kapt(compiler)
     }
 
     AndroidX.Compose.run {
@@ -81,28 +54,24 @@ dependencies {
         debugImplementation(tooling)
         androidTestImplementation(uiTestManifest)
         androidTestImplementation(uiTest)
-        androidTestImplementation(uiTestJunit)
-    }
-
-    AndroidX.Test.run {
-        androidTestImplementation(runner)
-    }
-
-    Google.run {
-        implementation(material)
-        androidTestImplementation(truth)
-    }
-
-
-    JUnit4.run {
-        testImplementation(junit)
-    }
-
-    Accompanist.run {
-        api(drawablePainter)
+        implementation(uiTestJunit)
     }
 
     Okhttp.run {
         implementation(okhttp)
+        api(mockWebserver)
+    }
+
+    Google.run {
+        implementation(truth)
+    }
+
+    Coroutines.run {
+        implementation(core)
+        implementation(test)
+    }
+
+    JUnit4.run {
+        testImplementation(junit)
     }
 }

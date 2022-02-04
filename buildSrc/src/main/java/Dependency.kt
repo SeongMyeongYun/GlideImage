@@ -15,16 +15,19 @@ object AndroidX {
         const val uiUtil = "androidx.compose.ui:ui-util:$version"
         const val runtime = "androidx.compose.runtime:runtime:$version"
         const val material = "androidx.compose.material:material:$version"
+        const val foundation = "androidx.compose.foundation:foundation:$version"
 
         const val tooling = "androidx.compose.ui:ui-tooling:$version"
         const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
         const val runtimeLivedata = "androidx.compose.runtime:runtime-livedata:$version"
-        const val uiTest = "androidx.compose.ui:ui-test-junit4:$version"
+        const val uiTest = "androidx.compose.ui:ui-test:$version"
+        const val uiTestJunit = "androidx.compose.ui:ui-test-junit4:$version"
 
 
         const val animation = "androidx.compose.animation:animation:$version"
         const val animationGraphics = "androidx.compose.animation:animation-graphics:$version"
         const val animationCore = "androidx.compose.animation:animation-core:$version"
+        const val uiTestManifest = "androidx.compose.ui:ui-test-manifest:$version"
     }
 
     object Activity {
@@ -97,6 +100,15 @@ object Retrofit {
     const val retrofit = "com.squareup.retrofit2:retrofit:$version"
     const val converterMoshi = "com.squareup.retrofit2:converter-moshi:$version"
     const val okhttp = "com.squareup.okhttp3:okhttp:5.0.0-alpha.2"
+
+
+}
+
+object Okhttp {
+    private const val version = "3.12.13"
+
+    const val okhttp = "com.squareup.okhttp3:okhttp:$version"
+    const val mockWebserver = "com.squareup.okhttp3:mockwebserver:$version"
 }
 
 object Moshi {
@@ -109,6 +121,9 @@ object Google {
 
     private const val materialVersion = "1.4.0"
     const val material = "com.google.android.material:material:$materialVersion"
+
+    private const val version = "1.1.3"
+    const val truth = "com.google.truth:truth:$version"
 }
 
 object Firebase {
@@ -148,20 +163,20 @@ object JUnit4 {
     const val params = "org.junit.jupiter:junit-jupiter-params:$version"
 }
 
-object JUnit5 {
-    /**
-     * junit5 hilt 에서 사용불가능
-     */
-    private const val version = "5.8.0"
-    private const val junit5Version = "1.3.0"
-
-    const val api = "org.junit.jupiter:junit-jupiter-api:$version"
-    const val engine = "org.junit.jupiter:junit-jupiter-engine:$version"
-
-    const val params = "org.junit.jupiter:junit-jupiter-params:$version"
-    const val testCore = "de.mannodermaus.junit5:android-test-core:$junit5Version"
-    const val runner = "de.mannodermaus.junit5:android-test-runner:$junit5Version"
-}
+//object JUnit5 {
+//    /**
+//     * junit5 hilt 에서 사용불가능
+//     */
+//    private const val version = "5.8.0"
+//    private const val junit5Version = "1.3.0"
+//
+//    const val api = "org.junit.jupiter:junit-jupiter-api:$version"
+//    const val engine = "org.junit.jupiter:junit-jupiter-engine:$version"
+//
+//    const val params = "org.junit.jupiter:junit-jupiter-params:$version"
+//    const val testCore = "de.mannodermaus.junit5:android-test-core:$junit5Version"
+//    const val runner = "de.mannodermaus.junit5:android-test-runner:$junit5Version"
+//}
 
 object Mockito {
     private const val version = "2.24.5"
@@ -173,6 +188,7 @@ object Mockito {
 object Glide {
     private const val version = "4.12.0"
     const val glide = "com.github.bumptech.glide:glide:$version"
+    const val integration ="com.github.bumptech.glide:okhttp3-integration:$version"
     const val compiler = "com.github.bumptech.glide:compiler:$version"
     const val webpDecoder = "com.github.zjupure:webpdecoder:2.0.$version"
 }

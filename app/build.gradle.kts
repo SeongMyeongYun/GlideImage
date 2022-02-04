@@ -85,4 +85,12 @@ dependencies {
     Accompanist.run {
         implementation(permission)
     }
+
+    Okhttp.run {
+        implementation(okhttp)
+    }
+
+    Glide.run {
+        implementation(Glide.webpDecoder)
+    }
 }

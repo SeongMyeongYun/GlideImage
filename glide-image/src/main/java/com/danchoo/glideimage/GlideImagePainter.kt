@@ -1,11 +1,13 @@
 package com.danchoo.glideimage
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.*
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.isSpecified
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -13,7 +15,6 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.RequestBuilder
@@ -21,12 +22,14 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.*
+import kotlin.math.roundToInt
 
 @Stable
 class GlideImagePainter internal constructor(
     private val context: Context,
     private val loader: GlideImageLoader,
     private val parentScope: CoroutineScope,
+    private val viewSize: Size,
     private val builder: RequestBuilder<Drawable>
 ) : Painter(), RememberObserver {
     internal var painter: Painter? by mutableStateOf(null)
@@ -49,11 +52,41 @@ class GlideImagePainter internal constructor(
             painter = null
             placeHolder = null
         }
+
+        override fun onLoadFailed(errorDrawable: Drawable?) {
+            drawable = errorDrawable
+        }
     }
 
     override fun DrawScope.onDraw() {
-        placeHolder?.apply { draw(intrinsicSize) }
-        painter?.apply { draw(intrinsicSize) }
+        val size = if (intrinsicSize.isSpecified) {
+            intrinsicSize
+        } else {
+            updateRequestSize(canvasSize = size)
+        }
+
+
+        placeHolder?.apply { draw(size) }
+        painter?.apply { draw(size) }
+    }
+
+    private fun updateRequestSize(canvasSize: Size): Size {
+        return Size(
+            width = when {
+                // If we have a canvas width, use it...
+                canvasSize.width >= 0.5f -> canvasSize.width.roundToInt()
+                // Otherwise we fall-back to the root view size as an upper bound
+                viewSize.width > 0 -> viewSize.width
+                else -> -1
+            }.toFloat(),
+            height = when {
+                // If we have a canvas height, use it...
+                canvasSize.height >= 0.5f -> canvasSize.height.roundToInt()
+                // Otherwise we fall-back to the root view size as an upper bound
+                viewSize.height > 0 -> viewSize.height
+                else -> -1
+            }.toFloat(),
+        )
     }
 
     override fun onAbandoned() {
@@ -96,6 +129,7 @@ fun rememberGlideImagePinter(
     requestBuilder = requestBuilder
 )
 
+@SuppressLint("UseCompatLoadingForDrawables")
 @Composable
 fun rememberGlideImagePinter(
     data: Any?,
@@ -118,10 +152,12 @@ fun rememberGlideImagePinter(
     } ?: builder
 
 
+    val pxW = LocalDensity.current.run { width.toPx() }
+    val pxH = LocalDensity.current.run { height.toPx() }
     if (width != 0.dp && height != 0.dp) {
         builder = builder.override(
-            LocalDensity.current.run { width.toPx() }.toInt(),
-            LocalDensity.current.run { height.toPx() }.toInt()
+            pxW.toInt(),
+            pxH.toInt()
         )
     }
 
@@ -139,16 +175,18 @@ fun rememberGlideImagePinter(
             context = context,
             builder = builder,
             loader = loader,
+            viewSize = Size(pxW, pxH),
             parentScope = scope
         )
     }
 
     if (builder.placeholderId != 0) {
-        painter.placeHolder = painterResource(builder.placeholderId)
+        context.getDrawable(builder.placeholderId)?.let {
+            painter.placeHolder = rememberDrawablePainter(it)
+        }
     }
 
     painter.drawable?.let {
-
         painter.painter = rememberDrawablePainter(drawable = painter.drawable)
     } ?: run {
         painter.painter = null
