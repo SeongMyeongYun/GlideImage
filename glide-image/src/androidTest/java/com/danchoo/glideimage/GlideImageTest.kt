@@ -3,7 +3,6 @@ package com.danchoo.glideimage
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.ShapeDrawable
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
