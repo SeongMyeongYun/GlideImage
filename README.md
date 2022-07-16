@@ -39,6 +39,7 @@ private fun TestComposable(
     height: Dp = 0.dp,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Crop,
+    isAnimation: Boolean,
     requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ) {
     Image(
@@ -49,6 +50,7 @@ private fun TestComposable(
             height = height,
             placeHolder = placeHolder,
             contentScale = contentScale,
+            isAnimation = isAnimation,
             requestBuilder = requestBuilder
         ),
         contentDescription = null,
@@ -62,6 +64,7 @@ private fun TestComposable(
     size: Dp = 0.dp,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Crop,
+    isAnimation: Boolean,
     requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ) {
     Image(
@@ -74,6 +77,7 @@ private fun TestComposable(
             requestBuilder = requestBuilder
         ),
         contentDescription = null,
+        isAnimation = isAnimation,
         contentScale = ContentScale.Crop
     )
 }
@@ -92,6 +96,7 @@ private fun TestComposable(
     height: Dp,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Fit,
+    isAnimation: Boolean,
     requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ) {
     // Image size != Bitmap Size
@@ -103,6 +108,7 @@ private fun TestComposable(
         height = height,
         placeHolder = placeHolder,
         contentScale = contentScale,
+        isAnimation = isAnimation,
         requestBuilder = requestBuilder
     )
 }
@@ -114,6 +120,7 @@ private fun TestComposable(
     data: Any?,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Fit,
+    isAnimation: Boolean,
     requestBuilder: RequestBuilder<Bitmap>.() -> RequestBuilder<Bitmap> = { this }
 ) {
     // Image size == Bitmap Size
@@ -124,6 +131,7 @@ private fun TestComposable(
         data = data,
         placeHolder = placeHolder,
         contentScale = contentScale,
+        isAnimation = isAnimation,
         requestBuilder = requestBuilder
     )
 }
@@ -141,6 +149,10 @@ class GlideAppImageLoaderImpl: GlideImageLoader {
     
     override fun getRequestManager(context: Context): RequestManager {
         return GlideApp.with(context)
+    }
+
+    override fun getAnimationDrawableLoopCount(): Int {
+        return 5
     }
 }
 
