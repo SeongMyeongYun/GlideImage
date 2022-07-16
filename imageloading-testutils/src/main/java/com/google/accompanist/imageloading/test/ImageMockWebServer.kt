@@ -68,8 +68,8 @@ fun ImageMockWebServer(responseDelayMs: Long = 0): MockWebServer {
     }
 
     return MockWebServer().apply {
-        setDispatcher(dispatcher)
-    }
+            this.dispatcher = dispatcher
+        }
 }
 
 private fun rawResourceAsResponse(
