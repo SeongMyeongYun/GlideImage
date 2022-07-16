@@ -17,6 +17,13 @@ buildscript {
     group = "com.github.danchoo21"
 }
 
+//plugins {
+//    id ("com.android.application") version "7.2.0" apply false
+//    id ("com.android.library") version "7.2.0" apply false
+//    id ("rg.jetbrains.kotlin.android") version "1.6.10" apply false
+//    id ("com.google.dagger.hilt.android") version "2.42" apply false
+//}
+
 tasks {
     val clean by registering(Delete::class) {
         delete(buildDir)
