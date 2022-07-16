@@ -21,6 +21,7 @@ fun GlideImage(
     data: Any?,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Fit,
+    isAnimation: Boolean = false,
     requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ) {
 
@@ -35,6 +36,7 @@ fun GlideImage(
             height = maxHeight,
             placeHolder = placeHolder,
             contentScale = contentScale,
+            isAnimation = isAnimation,
             requestBuilder = requestBuilder
         )
     }
@@ -49,6 +51,7 @@ fun GlideImage(
     height: Dp = width,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Fit,
+    isAnimation: Boolean = false,
     requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ) {
     Image(
@@ -59,6 +62,7 @@ fun GlideImage(
             height = height,
             placeHolder = placeHolder,
             contentScale = contentScale,
+            isAnimation = isAnimation,
             requestBuilder = requestBuilder
         ),
         contentDescription = contentDescription

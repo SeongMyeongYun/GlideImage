@@ -29,6 +29,8 @@ fun BaseAppModuleExtension.default() {
         versionCode = Config.VERSION_CODE
         versionName = Config.VERSION_NAME
 
+        vectorDrawables.useSupportLibrary = true
+
         testInstrumentationRunner = Config.TEST_INSTRUMENTATION_RUNNER
     }
 
@@ -77,6 +79,8 @@ fun LibraryExtension.default() {
         targetSdk = Config.TARGET_SDK
 
         testInstrumentationRunner = Config.TEST_INSTRUMENTATION_RUNNER
+
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes.run {

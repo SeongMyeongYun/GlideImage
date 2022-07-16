@@ -3,22 +3,27 @@ package com.danchoo.glideimage
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.*
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.geometry.isSpecified
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.integration.webp.decoder.WebpDrawable
+import com.bumptech.glide.integration.webp.decoder.WebpDrawableTransformation
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.FitCenter
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.*
@@ -45,7 +50,6 @@ class GlideImagePainter internal constructor(
         override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
             drawable = resource
 
-            Log.d("_SMY", "resource = ${resource.javaClass.simpleName} $transition")
         }
 
         override fun onLoadCleared(placeholder: Drawable?) {
@@ -129,7 +133,7 @@ fun rememberGlideImagePinter(
     requestBuilder = requestBuilder
 )
 
-@SuppressLint("UseCompatLoadingForDrawables")
+@SuppressLint("UseCompatLoadingForDrawables", "CheckResult")
 @Composable
 fun rememberGlideImagePinter(
     data: Any?,
@@ -137,12 +141,9 @@ fun rememberGlideImagePinter(
     height: Dp = width,
     @DrawableRes placeHolder: Int? = null,
     contentScale: ContentScale = ContentScale.Fit,
+    isAnimation: Boolean = false,
     requestBuilder: RequestBuilder<Drawable>.() -> RequestBuilder<Drawable> = { this }
 ): Painter {
-    if (data is ImageVector) {
-        return rememberVectorPainter(image = data)
-    }
-
     val context = LocalContext.current
     val loader = LocalImageLoader.current
     var builder = loader.getRequestBuilder(context).load(data)
@@ -167,6 +168,10 @@ fun rememberGlideImagePinter(
         else -> builder
     }
 
+    if (isAnimation || isAnimatedResource(data)) {
+        builder = builder.setAnimationListener()
+    }
+
     builder = requestBuilder(builder)
 
     val scope = rememberCoroutineScope { Dispatchers.Main.immediate }
@@ -186,6 +191,7 @@ fun rememberGlideImagePinter(
         }
     }
 
+
     painter.drawable?.let {
         painter.painter = rememberDrawablePainter(drawable = painter.drawable)
     } ?: run {
@@ -193,4 +199,45 @@ fun rememberGlideImagePinter(
     }
 
     return painter
+}
+
+@Composable
+private fun RequestBuilder<Drawable>.setAnimationListener(): RequestBuilder<Drawable> {
+    val fitCenter = FitCenter()
+    val loopCount = LocalImageLoader.current.getAnimationDrawableLoopCount()
+
+    return this
+        .optionalTransform(fitCenter)
+        .optionalTransform(WebpDrawable::class.java, WebpDrawableTransformation(fitCenter))
+        .listener(object : RequestListener<Drawable> {
+            override fun onLoadFailed(
+                e: GlideException?, model: Any?, target: Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                return false
+            }
+
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: Target<Drawable>?,
+                dataSource:
+                DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                if (resource is WebpDrawable) {
+                    resource.loopCount = loopCount
+                } else if (resource is GifDrawable) {
+                    resource.setLoopCount(loopCount)
+                }
+                return false
+            }
+        })
+}
+
+private fun isAnimatedResource(data: Any?): Boolean {
+    val url: String = data as? String ?: return false
+    return url.split(".").last().lowercase().let {
+        it == "webp" || it == "gif"
+    }
 }

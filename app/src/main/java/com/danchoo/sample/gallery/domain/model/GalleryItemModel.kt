@@ -12,4 +12,8 @@ data class GalleryItemModel(
     val createDate: Long,
     val mediaType: Int,
     val mineType: String
-)
+) {
+    fun isAnimation(): Boolean {
+        return mineType.contains("webp") || mineType.contains("gif")
+    }
+}

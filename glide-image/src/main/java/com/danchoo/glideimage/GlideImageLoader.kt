@@ -15,6 +15,7 @@ val LocalImageLoader = GlideImageLoaderCompositionLocal()
 interface GlideImageLoader {
     fun getRequestBuilder(context: Context): RequestBuilder<Drawable>
     fun getRequestManager(context: Context): RequestManager
+    fun getAnimationDrawableLoopCount(): Int
 }
 
 internal class GlideImageLoaderImpl : GlideImageLoader {
@@ -24,6 +25,10 @@ internal class GlideImageLoaderImpl : GlideImageLoader {
 
     override fun getRequestManager(context: Context): RequestManager {
         return Glide.with(context)
+    }
+
+    override fun getAnimationDrawableLoopCount(): Int {
+        return 5
     }
 }
 

@@ -37,4 +37,8 @@ class GlideAppImageLoaderImpl : GlideImageLoader {
     override fun getRequestManager(context: Context): RequestManager {
         return GlideApp.with(context)
     }
+
+    override fun getAnimationDrawableLoopCount(): Int {
+        return 5
+    }
 }

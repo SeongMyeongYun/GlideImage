@@ -36,6 +36,7 @@ android {
 
         animationsDisabled = true
     }
+    namespace = "com.google.accompanist.imageloading.test"
 }
 
 dependencies {

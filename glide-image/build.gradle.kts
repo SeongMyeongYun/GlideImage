@@ -17,10 +17,7 @@ android {
     defaultConfig.run {
         versionCode = Config.VERSION_CODE
         versionName = Config.VERSION_NAME
-
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,6 +34,7 @@ android {
 
         animationsDisabled = true
     }
+    namespace = "com.danchoo.glideimage"
 
     afterEvaluate {
         publishing {
@@ -67,6 +65,9 @@ dependencies {
 
     Glide.run {
         implementation(glide)
+        implementation(integration)
+        implementation(webpDecoder)
+        implementation(transformations)
         kapt(compiler)
     }
 

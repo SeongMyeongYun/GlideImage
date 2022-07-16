@@ -1,6 +1,6 @@
 object AndroidX {
-    private const val coreVersion = "1.7.0"
-    private const val appcompatVersion = "1.4.0"
+    private const val coreVersion = "1.8.0"
+    private const val appcompatVersion = "1.4.2"
 
     const val coreKtx = "androidx.core:core-ktx:$coreVersion"
     const val appcompat = "androidx.appcompat:appcompat:$appcompatVersion"
@@ -8,8 +8,7 @@ object AndroidX {
     const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
 
     object Compose {
-        const val version = "1.2.0-alpha01"
-
+        const val version = "1.1.1"
         const val layout = "androidx.compose.foundation:foundation-layout:$version"
         const val ui = "androidx.compose.ui:ui:$version"
         const val uiUtil = "androidx.compose.ui:ui-util:$version"
@@ -31,7 +30,7 @@ object AndroidX {
     }
 
     object Activity {
-        private const val version = "1.4.0"
+        private const val version = "1.5.0"
         const val compose = "androidx.activity:activity-compose:$version"
     }
 
@@ -40,7 +39,7 @@ object AndroidX {
     }
 
     object Lifecycle {
-        private const val version = "2.4.0"
+        private const val version = "2.5.0"
         const val core = "androidx.lifecycle:lifecycle-livedata-core-ktx:$version"
         const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
         const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:$version"
@@ -66,9 +65,9 @@ object AndroidX {
     }
 
     object Paging {
-        private const val version = "3.1.0"
+        private const val version = "3.1.1"
         const val ktx = "androidx.paging:paging-runtime-ktx:$version"
-        const val compose = "androidx.paging:paging-compose:1.0.0-alpha14"
+        const val compose = "androidx.paging:paging-compose:1.0.0-alpha15"
     }
 
     object Test {
@@ -100,12 +99,10 @@ object Retrofit {
     const val retrofit = "com.squareup.retrofit2:retrofit:$version"
     const val converterMoshi = "com.squareup.retrofit2:converter-moshi:$version"
     const val okhttp = "com.squareup.okhttp3:okhttp:5.0.0-alpha.2"
-
-
 }
 
 object Okhttp {
-    private const val version = "3.12.13"
+    private const val version = "4.10.0"
 
     const val okhttp = "com.squareup.okhttp3:okhttp:$version"
     const val mockWebserver = "com.squareup.okhttp3:mockwebserver:$version"
@@ -119,7 +116,7 @@ object Google {
     const val tasks = "com.google.android.gms:play-services-tasks:18.0.0"
     const val ads = "com.google.android.gms:play-services-ads:20.5.0"
 
-    private const val materialVersion = "1.4.0"
+    private const val materialVersion = "1.6.1"
     const val material = "com.google.android.material:material:$materialVersion"
 
     private const val version = "1.1.3"
@@ -139,11 +136,11 @@ object Hilt {
     const val compiler = "com.google.dagger:hilt-compiler:$version"
     const val testing = "com.google.dagger:hilt-android-testing:$version"
 
-    const val compose = "androidx.hilt:hilt-navigation-compose:1.0.0-beta01"
+    const val compose = "androidx.hilt:hilt-navigation-compose:1.0.0"
 }
 
 object Coroutines {
-    private const val version = "1.6.0"
+    private const val version = "1.6.4"
     const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
     const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
     const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
@@ -186,10 +183,11 @@ object Mockito {
 
 
 object Glide {
-    private const val version = "4.12.0"
+    private const val version = "4.13.2"
     const val glide = "com.github.bumptech.glide:glide:$version"
-    const val integration ="com.github.bumptech.glide:okhttp3-integration:$version"
+    const val integration = "com.github.bumptech.glide:okhttp3-integration:$version"
     const val compiler = "com.github.bumptech.glide:compiler:$version"
     const val webpDecoder = "com.github.zjupure:webpdecoder:2.0.$version"
+    const val transformations = "jp.wasabeef:glide-transformations:4.3.0"
 }
 

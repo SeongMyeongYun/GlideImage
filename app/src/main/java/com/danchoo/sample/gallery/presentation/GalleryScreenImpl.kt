@@ -50,6 +50,7 @@ fun GalleryScreenImpl(
                                 color = MaterialTheme.colors.onSurface.copy(alpha = 0.12f)
                             ),
                         data = pagingItems[index]?.uri ?: "",
+                        isAnimation = pagingItems[index]?.isAnimation() ?: false,
                         contentScale = ContentScale.Crop
                     )
                 }

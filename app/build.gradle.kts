@@ -23,6 +23,7 @@ android {
             )
         )
     }
+    namespace = "com.danchoo.sample"
 }
 
 dependencies {
@@ -79,6 +80,9 @@ dependencies {
 
     Glide.run {
         implementation(glide)
+        implementation(integration)
+        implementation(webpDecoder)
+        implementation(transformations)
         kapt(compiler)
     }
 
@@ -88,9 +92,5 @@ dependencies {
 
     Okhttp.run {
         implementation(okhttp)
-    }
-
-    Glide.run {
-        implementation(Glide.webpDecoder)
     }
 }
