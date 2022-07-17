@@ -1,33 +1,39 @@
 package com.danchoo.sample.gallery.presentation
 
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.danchoo.sample.BaseViewModel
-import com.danchoo.sample.gallery.domain.inspector.GalleryPagingUseCase
+import com.danchoo.sample.gallery.domain.inspector.GetGalleryPagingSourceCase
 import com.danchoo.sample.gallery.domain.model.GalleryItemModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-@OptIn(InternalCoroutinesApi::class)
 @HiltViewModel
 class GalleryViewModel @Inject constructor(
-    private val pagingUseCase: GalleryPagingUseCase,
+    private val getPagingUseCase: GetGalleryPagingSourceCase,
 ) : BaseViewModel<GalleryContract.GalleryIntent, GalleryContract.GalleryViewState, GalleryContract.GallerySideEffect>() {
 
-    init {
-    }
-
-    private val galleryListFlow = pagingUseCase().cachedIn(viewModelScope)
-
     fun galleryPagingItems(): Flow<PagingData<GalleryItemModel>> {
-        return galleryListFlow
+        return Pager(
+            config = PagingConfig(
+                pageSize = PAGE_SIZE,
+                prefetchDistance = PAGE_SIZE
+            )
+        ) {
+            getPagingUseCase()
+        }.flow.cachedIn(viewModelScope)
     }
 
     override fun setInitialState() = GalleryContract.GalleryViewState()
 
     override fun handleEvents(event: GalleryContract.GalleryIntent) {
+    }
+
+    companion object {
+        const val PAGE_SIZE = 30
     }
 }

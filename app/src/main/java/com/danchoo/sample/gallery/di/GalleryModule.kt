@@ -4,7 +4,7 @@ import android.content.Context
 import com.danchoo.sample.gallery.data.datasource.GalleryDataSource
 import com.danchoo.sample.gallery.data.datasource.GalleryDataSourceImpl
 import com.danchoo.sample.gallery.data.repository.GalleryRepositoryImpl
-import com.danchoo.sample.gallery.domain.inspector.GalleryPagingUseCase
+import com.danchoo.sample.gallery.domain.inspector.GetGalleryPagingSourceCase
 import com.danchoo.sample.gallery.domain.repository.GalleryRepository
 import dagger.Module
 import dagger.Provides
@@ -33,7 +33,7 @@ object GalleryModule {
     @Provides
     fun provideGalleryPagingUseCase(
         repository: GalleryRepository
-    ): GalleryPagingUseCase {
-        return GalleryPagingUseCase(repository)
+    ): GetGalleryPagingSourceCase {
+        return GetGalleryPagingSourceCase(repository)
     }
 }
