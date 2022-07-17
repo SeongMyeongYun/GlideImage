@@ -5,11 +5,13 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
 import com.danchoo.sample.gallery.domain.model.GalleryItemModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class GalleryDataSourceImpl constructor(
-    private val context: Context
+class GalleryDataSourceImpl @Inject constructor(
+    @ApplicationContext private val context: Context
 ) : GalleryDataSource {
     override fun getDefaultCursor(): Cursor {
         return getCursor(getMediaDefaultProjection())

@@ -6,8 +6,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.danchoo.sample.BaseViewModel
-import com.danchoo.sample.gallery.domain.inspector.GetGalleryPagingSourceCase
 import com.danchoo.sample.gallery.domain.model.GalleryItemModel
+import com.danchoo.sample.gallery.domain.usecase.GetGalleryPagingSourceCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

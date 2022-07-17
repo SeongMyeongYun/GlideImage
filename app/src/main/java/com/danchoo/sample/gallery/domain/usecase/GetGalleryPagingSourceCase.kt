@@ -1,9 +1,8 @@
-package com.danchoo.sample.gallery.domain.inspector
+package com.danchoo.sample.gallery.domain.usecase
 
 import com.danchoo.sample.gallery.domain.repository.GalleryRepository
-import javax.inject.Inject
 
-class GetGalleryPagingSourceCase @Inject constructor(
+class GetGalleryPagingSourceCase(
     private val repository: GalleryRepository
 ) {
     operator fun invoke() = repository.getGalleryPagingSource()

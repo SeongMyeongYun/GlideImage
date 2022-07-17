@@ -6,8 +6,9 @@ import com.danchoo.sample.gallery.data.datasource.GalleryPagingSource
 import com.danchoo.sample.gallery.domain.model.GalleryItemModel
 import com.danchoo.sample.gallery.domain.repository.GalleryRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class GalleryRepositoryImpl(
+class GalleryRepositoryImpl @Inject constructor(
     private val dataSource: GalleryDataSource
 ) : GalleryRepository {
     override fun getGalleryItemList(count: Int): Flow<List<GalleryItemModel>> {
