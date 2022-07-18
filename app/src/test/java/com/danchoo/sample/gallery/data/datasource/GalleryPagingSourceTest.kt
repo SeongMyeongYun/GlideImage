@@ -15,6 +15,7 @@ class GalleryPagingSourceTest {
     private val dataSource: GalleryDataSource = mockk()
     private val cursor: Cursor = mockk()
     private val resultList = mutableListOf<GalleryItemModel>()
+
     @Before
     fun setup() {
         for (index in 0..100) {
@@ -25,6 +26,7 @@ class GalleryPagingSourceTest {
                 )
             )
         }
+
         every { dataSource.getDefaultCursor() } returns cursor
     }
 
