@@ -28,13 +28,14 @@ class GalleryPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GalleryItemModel> {
         return withContext(Dispatchers.IO) {
-            val key = params.key ?: 0
-            val galleryItemList = getGalleryList(key, params.loadSize)
-
-            val prevKey = if (key == 0) null else key - 1
-            val nextKey = if (galleryItemList.isNullOrEmpty()) null else key + 1
-
             try {
+                val key = params.key ?: 0
+                val galleryItemList = getGalleryList(key, params.loadSize)
+
+                val prevKey = if (key == 0) null else key - 1
+                val nextKey = if (galleryItemList.isEmpty()) null else key + 1
+
+
                 LoadResult.Page(
                     data = galleryItemList,
                     prevKey = prevKey,

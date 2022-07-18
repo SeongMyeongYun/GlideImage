@@ -56,4 +56,31 @@ class GalleryPagingSourceTest {
         Assert.assertEquals(loadSize, result.size)
         Assert.assertArrayEquals(loadResult.data.toTypedArray(), result.toTypedArray())
     }
+
+    @Test
+    fun testGalleryPagingSourceException() = runTest {
+        val pagingSource = GalleryPagingSource(dataSource)
+
+        val key = 0
+        val loadSize = 30
+
+        every {
+            dataSource.getGalleryItemList(
+                cursor,
+                key,
+                loadSize
+            )
+        } throws Exception("throw exception")
+
+        val loadResult = pagingSource.load(
+            PagingSource.LoadParams.Refresh(
+                key = key,
+                loadSize = loadSize,
+                placeholdersEnabled = false
+            )
+        ) as PagingSource.LoadResult.Error
+
+
+        Assert.assertEquals(loadResult.throwable.message, "throw exception")
+    }
 }
