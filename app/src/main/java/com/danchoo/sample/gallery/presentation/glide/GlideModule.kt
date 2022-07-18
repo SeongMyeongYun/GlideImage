@@ -1,4 +1,4 @@
-package com.danchoo.sample
+package com.danchoo.sample.gallery.presentation.glide
 
 import android.content.Context
 import android.graphics.drawable.Drawable

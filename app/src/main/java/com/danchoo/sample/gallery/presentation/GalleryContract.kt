@@ -1,9 +1,8 @@
 package com.danchoo.sample.gallery.presentation
 
-import com.danchoo.sample.BaseIntent
-import com.danchoo.sample.BaseSideEffect
-import com.danchoo.sample.BaseViewState
-import com.danchoo.sample.gallery.domain.model.GalleryItemModel
+import com.danchoo.sample.gallery.presentation.base.BaseIntent
+import com.danchoo.sample.gallery.presentation.base.BaseSideEffect
+import com.danchoo.sample.gallery.presentation.base.BaseViewState
 
 object GalleryContract {
 
