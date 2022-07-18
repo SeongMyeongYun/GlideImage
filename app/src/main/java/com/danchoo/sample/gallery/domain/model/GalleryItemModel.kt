@@ -6,12 +6,12 @@ data class GalleryItemModel(
     val id: Int,
     val uri: Uri? = null,
     val name: String,
-    val addedDate: String,
-    val modifiedDate: String,
-    val size: Long,
-    val createDate: Long,
-    val mediaType: Int,
-    val mineType: String
+    val addedDate: String = "",
+    val modifiedDate: String = "",
+    val size: Long = 0,
+    val createDate: Long = 0,
+    val mediaType: Int = 0,
+    val mineType: String = ""
 ) {
     fun isAnimation(): Boolean {
         return mineType.contains("webp") || mineType.contains("gif")

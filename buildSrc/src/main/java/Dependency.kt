@@ -160,6 +160,11 @@ object JUnit4 {
     const val params = "org.junit.jupiter:junit-jupiter-params:$version"
 }
 
+object MockK {
+    private const val version = "1.12.4"
+    const val mockk = "io.mockk:mockk:$version"
+}
+
 //object JUnit5 {
 //    /**
 //     * junit5 hilt 에서 사용불가능
@@ -174,12 +179,6 @@ object JUnit4 {
 //    const val testCore = "de.mannodermaus.junit5:android-test-core:$junit5Version"
 //    const val runner = "de.mannodermaus.junit5:android-test-runner:$junit5Version"
 //}
-
-object Mockito {
-    private const val version = "2.24.5"
-    const val mock = "org.mockito:mockito-android:$version"
-    const val mockInline = "org.mockito:mockito-inline:$version"
-}
 
 
 object Glide {

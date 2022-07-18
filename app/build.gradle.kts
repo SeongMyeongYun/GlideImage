@@ -93,4 +93,12 @@ dependencies {
     Okhttp.run {
         implementation(okhttp)
     }
+
+    MockK.run {
+        testImplementation(mockk)
+    }
+
+    Coroutines.run {
+        testImplementation(test)
+    }
 }
