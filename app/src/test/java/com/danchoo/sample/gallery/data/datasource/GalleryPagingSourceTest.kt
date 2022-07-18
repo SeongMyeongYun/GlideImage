@@ -50,6 +50,8 @@ class GalleryPagingSourceTest {
         ) as PagingSource.LoadResult.Page
 
 
+        Assert.assertEquals(loadSize, loadResult.data.size)
+        Assert.assertEquals(loadSize, result.size)
         Assert.assertArrayEquals(loadResult.data.toTypedArray(), result.toTypedArray())
     }
 }
