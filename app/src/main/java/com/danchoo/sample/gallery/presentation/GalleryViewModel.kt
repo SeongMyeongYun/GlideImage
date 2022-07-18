@@ -21,7 +21,8 @@ class GalleryViewModel @Inject constructor(
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
-                prefetchDistance = PAGE_SIZE
+                prefetchDistance = PAGE_SIZE,
+                initialLoadSize = PAGE_SIZE
             )
         ) {
             getPagingUseCase()
